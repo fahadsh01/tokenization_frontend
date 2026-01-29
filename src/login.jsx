@@ -22,8 +22,8 @@ const handleSubmit = async (e) => {
       { withCredentials: true }
     );
 
+console.log(res)
     const role = res.data.data.user.role;
-
     setMessage("Login successful");
 
     if (role === "SUPER_ADMIN") {

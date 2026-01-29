@@ -30,8 +30,6 @@ const [activeStatus, setActiveStatus] = useState("ALL");
         withCredentials: true,
       }
     );
-console.log(res)
-
     setAppointments(res.data.data || []);
     if (!res.data.data?.length) {
       setMessage(res.data.message);
@@ -63,16 +61,14 @@ useEffect(() => {
         </p>
       </div>
 
-      {/* Loading Overlay */}
       {loading && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
           <span className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin" />
         </div>
       )}
 
-      {/* Filter Buttons */}
      <div className="bg-white p-4 rounded-lg shadow mb-6 flex flex-wrap gap-2">
-  <button
+    <button
     onClick={() => fetchAppointments("ALL")}
     className={getButtonClass("ALL")}
   >
@@ -100,9 +96,6 @@ useEffect(() => {
     Done
   </button>
 </div>
-
-
-      {/* Message */}
       {message && (
         <div
           className={`mb-4 text-sm text-center rounded-lg px-4 py-2 border
@@ -116,7 +109,6 @@ useEffect(() => {
         </div>
       )}
 
-      {/* ===== MOBILE VIEW ===== */}
       <div className="space-y-4 md:hidden">
         {appointments.map((appt) => (
           <div

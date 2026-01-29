@@ -8,7 +8,6 @@ const CreateAppointment = () => {
       const [message, setMessage] = useState("");
       const [messageType, setMessageType] = useState(""); 
   const [token,setToken]=useState({})
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -22,18 +21,16 @@ const CreateAppointment = () => {
         },
         { withCredentials: true }
       );
-       console.log(res)
       setMessage(" Appionment created successfully");
       setMessageType("success")
       setToken(res.data.data.appointment)
       console.log(token)
         const whatsappUrl = res.data.data.whatsappUrl;
         const desktopUrl = res.data.data.desktopUrl;
-        console.log(whatsappUrl)
-        window.location.href = desktopUrl;
-setTimeout(() => {
-  window.location.href =  whatsappUrl;
-}, 800);
+
+            window.location.href = desktopUrl;
+
+   
 
     } catch (err) {
       setMessage(

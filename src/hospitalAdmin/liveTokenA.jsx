@@ -7,20 +7,19 @@ function LiveTokenPage() {
   const [currentToken, setCurrentToken] = useState(null);
   const [nextToken, setNextToken] = useState(null);
   const [queueState, setQueueState] = useState("IDLE");
-
-  // 🔹 FETCH LIVE STATE (READ ONLY)
+  const[button,setButton]=useState("")
   const fetchLiveToken = async () => {
     setLoading(true);
     setMessage("");
-
     try {
       const res = await axiosInstance.get(
         "/appointment/liveToken",
         { withCredentials: true }
       );
-console.log(res)
+       console.log(res)
       setCurrentToken(res.data.data.currentToken);
       setNextToken(res.data.data.nextToken);
+      setButton(res.data.data.state);
       setQueueState(res.data.data.queueState);
     } catch (err) {
       setMessage(err.response?.data?.message || "Failed to fetch token");
@@ -28,18 +27,17 @@ console.log(res)
       setLoading(false);
     }
   };
-
-  // 🔹 ADVANCE TOKEN (ADMIN ACTION)
   const advanceToken = async () => {
     setLoading(true);
     try {
-      await axiosInstance.post(
+      const res =await axiosInstance.post(
         "/appointment/advanceToken",
         {},
         { withCredentials: true }
       );
       setCurrentToken(res.data.data.currentToken);
       setNextToken(res.data.data.nextToken);
+            setButton(res.data.data.state);
       setQueueState(res.data.data.queueState);
     } catch {
       setMessage("Failed to advance token");
@@ -75,9 +73,9 @@ console.log(res)
 
         <button
           onClick={advanceToken}
-          className="px-8 py-3 bg-gray-900 text-white rounded-lg hover:bg-gray-800"
+          className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-gray-800"
         >
-          Next Patient
+         {button}
         </button>
 
         <p className="text-sm text-gray-500 mt-4">

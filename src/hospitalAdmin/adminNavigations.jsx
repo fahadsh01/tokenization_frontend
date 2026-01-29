@@ -7,7 +7,6 @@ function HospitalSidebar() {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
     const [profile, setProfile] = useState({});
-
  useEffect(() => {
   const fetchUserProfile = async () => {
     try {
@@ -149,7 +148,8 @@ console.log(res.data.data)
           >
              Live Token
           </NavLink>
-           <NavLink
+           <NavLink 
+
             to="/hospital/madePayment"
             onClick={() => setOpen(false)}
             className={({ isActive }) =>
@@ -161,6 +161,19 @@ console.log(res.data.data)
             }
           >
 Made-Payment          </NavLink>
+    <NavLink 
+
+            to="/hospital/myPayments"
+            onClick={() => setOpen(false)}
+            className={({ isActive }) =>
+              `block px-4 py-2 rounded-lg text-sm font-medium ${
+                isActive
+                  ? "bg-blue-600 text-white"
+                  : "text-slate-300 hover:bg-slate-800"
+              }`
+            }
+          >
+MyPayments          </NavLink>
         </nav>
  
         {/* Logout */}

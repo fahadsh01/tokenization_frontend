@@ -4,33 +4,29 @@ import axiosInstance from "../axiosinstance";
 function CreateTenant() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
-
-  // Basic tenant fields
   const [hospitalname, setHospitalname] = useState("");
   const [tenantid, setTenantid] = useState("");
   const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-
-    const [fullname, setFullname] = useState("");
-
+  const [password, setPassword] = useState("");
+  const [fullname, setFullname] = useState("");
   const [contact, setContact] = useState("");
   const [ planType, setPlanType] = useState("Monthly");
   const [subscriptionPrice, setSubscriptionPrice] = useState("");
   const [expiryDate, setExpiryDate] = useState("");
   const [status, setStatus] = useState("Active");
-const [messageType, setMessageType] = useState(""); // "success" | "error"
-
-  // WhatsApp
+ const [messageType, setMessageType] = useState("");
   const [whatsappEnabled, setWhatsappEnabled] = useState(false);
   const [whatsappSender, setWhatsappSender] = useState("");
   const [twilioSid, setTwilioSid] = useState("");
   const [twilioToken, setTwilioToken] = useState("");
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setMessage("");
-
+if (!planType) {
+  setMessage("Please select a plan");
+  return;
+}
     try {
       await axiosInstance.post(
         "/users/register",
@@ -69,7 +65,6 @@ const [messageType, setMessageType] = useState(""); // "success" | "error"
       setLoading(false);
     }
   };
-
   return (
     <div className="p-6">
       {/* Header */}
@@ -104,7 +99,6 @@ const [messageType, setMessageType] = useState(""); // "success" | "error"
             placeholder="your Name"
             className="w-full rounded-lg border px-4 py-2 focus:ring-2 focus:ring-blue-500"
           />
-          {/* Tenant ID */}
           <input
             value={tenantid}
             onChange={(e) => setTenantid(e.target.value)}

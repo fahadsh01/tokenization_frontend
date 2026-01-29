@@ -4,6 +4,7 @@ import SuperAdminTenants from "./hospitaltenet";
 import SuperAdminPayments from "./payments";
 import CreateTenant from "./createTenet";
 import SuperAdminSidebar from "./SuperAdmin";
+import AdminPaymentAccounts from "./AdminPaymentAccounts"
 import Footer from "./footer";
 
 function DashboardA() {
@@ -17,6 +18,7 @@ function DashboardA() {
             <Route index element={<CreateTenant />} />
             <Route path="tenants-list" element={<SuperAdminTenants />} />
             <Route path="payments" element={<SuperAdminPayments />} />
+           <Route path="paymentAccounts" element={<AdminPaymentAccounts />} />
           </Routes>
         </main>
         <Footer />

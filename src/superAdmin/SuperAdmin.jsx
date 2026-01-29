@@ -10,15 +10,12 @@ const navigate = useNavigate();
 
  const handleClick = async () => {
       setLoading(true)
-
   try {
     const res = await axiosInstance.post(
       "/admin/logout",
       {},
       { withCredentials: true }
     );
-
-    console.log(res);
     navigate("/login", { replace: true });
   } catch (error) {
     console.error(
@@ -128,9 +125,21 @@ const navigate = useNavigate();
 >
   💳 Payments
 </NavLink>
+<NavLink
+  to="/super-admin/paymentAccounts"
+  className={({ isActive }) =>
+    `block px-4 py-2 rounded-lg text-sm font-medium ${
+      isActive
+        ? "bg-blue-600 text-white"
+        : "text-slate-300 hover:bg-slate-800"
+    }`
+  }
+>
+  💳 Payment-Accounts
+
+</NavLink>
 
 </nav>
-
 
         {/* Logout */}
          <div className="px-4 py-4 border-t border-slate-800">

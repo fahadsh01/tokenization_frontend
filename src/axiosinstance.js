@@ -26,13 +26,13 @@ axiosInstance.interceptors.response.use(
     const originalRequest = error.config;
 
     // Ignore refresh request itself
-    if (originalRequest.url?.includes("/users/refreshAccessToken")) {
+    if (originalRequest.url?.includes("/admin/refreshAccessToken")) {
       return Promise.reject(error);
     }
    if (originalRequest.url?.includes("/login")) {
       return Promise.reject(error);
     }
-    if (error.response?.status === 300 && !originalRequest._retry) {
+    if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 
       // If refresh already in progress → queue request
