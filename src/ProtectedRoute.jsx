@@ -28,6 +28,7 @@ function ProtectedRoute({ roles }) {
 
   if (loading) return <LoadingSpinner />; // or spinner
 
+  if (!allowed) return <Navigate to="/login" replace />;
 
   return <Outlet />;
 }
