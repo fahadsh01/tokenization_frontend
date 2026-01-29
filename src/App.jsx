@@ -5,7 +5,6 @@ import Login from "./login";
 import Dashboard from "./hospitalAdmin/adminDasbord";
 import DashboardA from "./superAdmin/superAdminDashbord";
 import ProtectedRoute from "./ProtectedRoute";
-import PublicTokenScreen from "./publicLiveToken";
 function App() {
   return (
    <Router>
@@ -17,10 +16,6 @@ function App() {
     <Route element={<ProtectedRoute roles={["HOSPITAL_ADMIN"]} />}>
       <Route path="/hospital/*" element={<Dashboard />} />
     </Route>
-    <Route
-          path="/:tenantId"
-          element={<PublicTokenScreen />}
-        />
     <Route path="*" element={<Navigate to="/login" replace />} />
   </Routes>
 
