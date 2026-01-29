@@ -5,7 +5,6 @@ import axiosInstance from "./axiosinstance";
 
 function PublicTokenScreen() {
   const { tenantId } = useParams();
-
   const [currentToken, setCurrentToken] = useState(null);
   const [nextToken, setNextToken] = useState(null);
   const [hospital, setHospital] = useState(null);
