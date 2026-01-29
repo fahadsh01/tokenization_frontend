@@ -89,6 +89,7 @@ const navigate = useNavigate();
 <NavLink
   to="/super-admin"
   end
+  onClick={() => setOpen(false)}
   className={({ isActive }) =>
     `block px-4 py-2 rounded-lg text-sm font-medium ${
       isActive
@@ -102,6 +103,7 @@ const navigate = useNavigate();
 
 <NavLink
   to="/super-admin/tenants-list"
+  onClick={() => setOpen(false)}
   className={({ isActive }) =>
     `block px-4 py-2 rounded-lg text-sm font-medium ${
       isActive
@@ -115,6 +117,7 @@ const navigate = useNavigate();
 
 <NavLink
   to="/super-admin/payments"
+  onClick={() => setOpen(false)}
   className={({ isActive }) =>
     `block px-4 py-2 rounded-lg text-sm font-medium ${
       isActive
@@ -127,6 +130,7 @@ const navigate = useNavigate();
 </NavLink>
 <NavLink
   to="/super-admin/paymentAccounts"
+  onClick={() => setOpen(false)}
   className={({ isActive }) =>
     `block px-4 py-2 rounded-lg text-sm font-medium ${
       isActive
