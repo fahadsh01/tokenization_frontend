@@ -15,6 +15,8 @@ function SuperAdminPayments() {
     const [loading, setLoading] = useState(false);
   const [selectedPayment, setSelectedPayment] = useState(null);
    const [paymenttlist, setPaymentlist] = useState([]);
+   const [messagee, setMessagee] = useState("");
+     const [messageTypee, setMessageTypee] = useState("");
      const [message, setMessage] = useState("");
      const [messageType, setMessageType] = useState("");
     const [ planType, setPlanType] = useState("");
@@ -51,7 +53,7 @@ useEffect(() => {
 }, []);
 const handleclick = async (tenantid) => {
   setLoading(true);
-  setMessage("");
+  setMessagee("");
   try {
     const res = await axiosInstance.post(
       "/payment/PaymentApproval",
@@ -65,13 +67,13 @@ const handleclick = async (tenantid) => {
         withCredentials: true,
       }
     );
-    setMessage(res.data.message);
-    setMessageType("success");
+    setMessagee(res.data.message);
+    setMessageTypee("success");
   } catch (err) {
-    setMessage(
+    setMessagee(
       err.response?.data?.message || "Payment approval failed"
     );
-    setMessageType("error");
+    setMessageTypee("error");
   } finally {
     setLoading(false);
 
@@ -79,7 +81,7 @@ const handleclick = async (tenantid) => {
 };
 const handleclick1 = async (tenantid) => {
   setLoading(true);
-  setMessage("");
+  setMessagee("");
   try {
     const res = await axiosInstance.post(
       "/payment/rejectPayment",
@@ -90,13 +92,13 @@ const handleclick1 = async (tenantid) => {
         withCredentials: true,
       }
     );
-    setMessage(res.data.message);
-    setMessageType("success");
+    setMessagee(res.data.message);
+    setMessageTypee("success");
   } catch (err) {
-    setMessage(
+    setMessagee(
       err.response?.data?.message || "Payment approval failed"
     );
-    setMessageType("error");
+    setMessageTypee("error");
   } finally {
     setLoading(false);
 
@@ -290,6 +292,18 @@ SUSPENDED  </button>
           onChange={(e)=>{setExpiryDate(e.target.value)}}
         />
       </div>
+      {messagee && (
+        <div
+          className={`mb-4 text-sm text-center rounded-lg px-4 py-2 border
+            ${
+              messageTypee === "success"
+                ? "text-green-700 bg-green-50 border-green-200"
+                : "text-red-700 bg-red-50 border-red-200"
+            }`}
+        >
+          {message}
+        </div>
+      )}
       <div className="flex gap-3 pt-4">
         <button 
        onClick={() => {
