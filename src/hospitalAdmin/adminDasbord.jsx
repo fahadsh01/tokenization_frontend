@@ -7,6 +7,9 @@ import LiveTokenPage from "./liveTokenA";
 import HospitalSidebar from "./adminNavigations";
 import MadePayment from "./MadePayment"
 import MyPayments from "./MyPayments"
+import DoctorDashboard from "./DoctorDashboard";
+import ProductOverview from "./Settings";
+import Settings from "./sett";
 import Footer from "./footer";
 
 function Dashboard() {
@@ -20,8 +23,12 @@ function Dashboard() {
               <Route  index element={<CreateAppointment />} />
               <Route path="appointments-list" element={<AppointmentsList />} />
               <Route path="live-token" element={<LiveTokenPage />} />
-                            <Route path="madePayment" element={<MadePayment/>} />
-                                                        <Route path="myPayments" element={<MyPayments/>} />
+              <Route path="madePayment" element={<MadePayment/>} />
+              <Route path="myPayments" element={<MyPayments/>} />
+                             <Route path="summary" element={<DoctorDashboard/>} />
+                             <Route path="overview" element={<ProductOverview/>} />
+                             <Route path="settings" element={<Settings/>} />
+
 
             </Routes>
           </main>

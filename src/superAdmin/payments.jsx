@@ -277,7 +277,7 @@ SUSPENDED  </button>
       {/* Update Fields */}
       <div className="space-y-3">
         <input
-          placeholder="Plan Type"
+          placeholder="Trial,Monthly,Yearly"
           className="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
         onChange={(e)=>{setPlanType(e.target.value)}}
         />

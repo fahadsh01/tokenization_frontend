@@ -4,6 +4,7 @@ import axiosInstance from "../axiosinstance";
 const CreateAppointment = () => {
   const [patientName, setPatientName]=useState("")
     const [whatsapp ,setWhatsapp]=useState("")
+    const [amount ,setamount]=useState(0)
     const [loading, setLoading] = useState(false);
       const [message, setMessage] = useState("");
       const [messageType, setMessageType] = useState(""); 
@@ -17,7 +18,7 @@ const CreateAppointment = () => {
      const res= await axiosInstance.post(
         "/appointment/createappointment",
         {
-          patientName,whatsapp
+          patientName,whatsapp,amount
         },
         { withCredentials: true }
       );
@@ -83,13 +84,26 @@ const CreateAppointment = () => {
               </label>
               <input
                 type="text"
-                placeholder="e.g. 0301XXXXXXX"
+                placeholder="92500764334"
                 className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                            onChange={(e)=>{setWhatsapp(e.target.value)}}
 
              />
+<span className="block mt-1 text-xs text-gray-500">
+    WhatsApp number must start with country code without operators
+  </span>            </div>
+   <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Payment
+              </label>
+              <input
+                type="number"
+                placeholder="PKR"
+                className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                           onChange={(e)=>{setamount(e.target.value)}}
+
+             />
             </div>
-  
 
             {/* Submit Button */}
             <button 

@@ -5,11 +5,15 @@ const statusStyles = {
   WAITING: "bg-yellow-100 text-yellow-800",
   IN_PROGRESS: "bg-blue-100 text-blue-800",
   DONE: "bg-green-100 text-green-800",
+  SKIPPED:"bg-slate-300 text-slate-800",
+  PAID: "bg-green-100 text-green-800",
+  UNPAID: "bg-yellow-100 text-yellow-800",
+
 };
 function AppointmentsList() {
   const getButtonClass = (status) =>
   activeStatus === status
-    ? "px-4 py-2 text-sm rounded bg-gray-800 text-white"
+    ? "px-4 py-2 text-sm rounded bg-blue-600 text-white"
     : "px-4 py-2 text-sm rounded bg-gray-100 text-gray-700";
   const [loading, setLoading] = useState(false);
   const [appointments, setAppointments] = useState([]);
@@ -30,6 +34,7 @@ const [activeStatus, setActiveStatus] = useState("ALL");
         withCredentials: true,
       }
     );
+    console.log("ress",res)
     setAppointments(res.data.data || []);
     if (!res.data.data?.length) {
       setMessage(res.data.message);
@@ -95,6 +100,14 @@ useEffect(() => {
   >
     Done
   </button>
+ <button
+    onClick={() => fetchAppointments("SKIPPED")}
+    className={getButtonClass("SKIPPED")}
+  >
+    Skiped
+  </button>
+
+
 </div>
       {message && (
         <div
@@ -149,6 +162,10 @@ useEffect(() => {
               <th className="text-left px-4 py-3">Patient</th>
               <th className="text-left px-4 py-3">WhatsApp</th>
               <th className="text-left px-4 py-3">Status</th>
+              <th className="text-left px-4 py-3">Amount</th>
+              <th className="text-left px-4 py-3">Payment</th>
+
+
             </tr>
           </thead>
           <tbody>
@@ -166,6 +183,7 @@ useEffect(() => {
                 <td className="px-4 py-3">
                   {appt.whatsapp}
                 </td>
+               
                 <td className="px-4 py-3">
                   <span
                     className={`px-3 py-1 rounded-full text-xs font-medium ${
@@ -173,6 +191,19 @@ useEffect(() => {
                     }`}
                   >
                     {appt.status.replace("_", " ")}
+                  </span>
+                </td>
+                 <td className="px-4 py-3">
+                  {appt.payment.amount}
+                </td>
+                 
+                 <td className="px-4 py-3">
+                  <span
+                    className={`px-3 py-1 rounded-full text-xs font-medium ${
+                      statusStyles[appt.payment.status]
+                    }`}
+                  >
+                    {appt.payment.status.replace("_", " ")}
                   </span>
                 </td>
               </tr>

@@ -174,8 +174,47 @@ Made-Payment          </NavLink>
             }
           >
 MyPayments          </NavLink>
+ <NavLink 
+
+            to="/hospital/summary"
+            onClick={() => setOpen(false)}
+            className={({ isActive }) =>
+              `block px-4 py-2 rounded-lg text-sm font-medium ${
+                isActive
+                  ? "bg-blue-600 text-white"
+                  : "text-slate-300 hover:bg-slate-800"
+              }`
+            }
+          >
+Summary          </NavLink>
+ <NavLink 
+
+            to="/hospital/overview"
+            onClick={() => setOpen(false)}
+            className={({ isActive }) =>
+              `block px-4 py-2 rounded-lg text-sm font-medium ${
+                isActive
+                  ? "bg-blue-600 text-white"
+                  : "text-slate-300 hover:bg-slate-800"
+              }`
+            }
+          >
+  Guide        </NavLink>
+  <NavLink 
+
+            to="/hospital/settings"
+            onClick={() => setOpen(false)}
+            className={({ isActive }) =>
+              `block px-4 py-2 rounded-lg text-sm font-medium ${
+                isActive
+                  ? "bg-blue-600 text-white"
+                  : "text-slate-300 hover:bg-slate-800"
+              }`
+            }
+          >
+ Settings        </NavLink>
         </nav>
- 
+
         {/* Logout */}
 
        <div className="px-4 py-4 border-t border-slate-800">
