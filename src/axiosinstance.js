@@ -7,9 +7,6 @@ const axiosInstance = axios.create({
   withCredentials: true,
 });
 
-/* ===============================
-   REFRESH TOKEN SYNCHRONIZATION
-================================ */
 
 let isRefreshing = false;
 let failedQueue = [];
@@ -19,7 +16,6 @@ const processQueue = (error) => {
   failedQueue = [];
 };
 
-// RESPONSE INTERCEPTOR
 axiosInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
@@ -35,7 +31,6 @@ axiosInstance.interceptors.response.use(
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 
-      // If refresh already in progress → queue request
       if (isRefreshing) {
         return new Promise((_, reject) => {
           failedQueue.push({ reject });
@@ -45,7 +40,6 @@ axiosInstance.interceptors.response.use(
       isRefreshing = true;
 
       try {
-        // Call refresh endpoint
         await axios.post(
           `${API_BASE}/users/refreshAccessToken`,
           {},
@@ -55,13 +49,11 @@ axiosInstance.interceptors.response.use(
         isRefreshing = false;
         processQueue(null);
 
-        // Retry original request
         return axiosInstance(originalRequest);
       } catch (refreshError) {
         isRefreshing = false;
         processQueue(refreshError);
 
-        // Hard logout (refresh token invalid)
         window.location.replace("/login");
         return Promise.reject(refreshError);
       }

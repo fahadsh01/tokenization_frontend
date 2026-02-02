@@ -112,8 +112,3 @@ export default DoctorDashboard;
 
 
 
- await Appointment.find({
-    tenant_id: tenantId,
-    status: "WAITING",
-     appointmentDatePK: { $in: [yesterdayPK, todayPK] }, 
-  }).sort({ appointmentDatePK: 1 ,tokenNumber: 1 });
