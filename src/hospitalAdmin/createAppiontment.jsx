@@ -51,11 +51,7 @@ const CreateAppointment = () => {
           Register a patient and generate a token
         </p>
       </div>
-   {loading && (
-  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-    <span className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin" />
-  </div>
-)}
+
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="bg-white rounded-xl shadow-md p-5 md:p-6 w-full lg:max-w-xl">
           <div className="space-y-5">
@@ -102,11 +98,14 @@ const CreateAppointment = () => {
             </div>
 
             {/* Submit Button */}
-            <button 
-            onClick={handleSubmit}
-            className="w-full bg-blue-600 text-white py-2.5 rounded-lg font-medium hover:bg-blue-700 transition">
-              Create Appointment
-            </button>
+            <button
+  disabled={loading}
+  onClick={handleSubmit}
+  className="w-full bg-blue-600 text-white py-2.5 rounded-lg font-medium hover:bg-blue-700 transition"
+>
+  {loading ? "Creating..." : "Create Appointment"}
+</button>
+
           </div>
         </div>
 

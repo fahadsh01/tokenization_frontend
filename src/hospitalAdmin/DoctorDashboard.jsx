@@ -5,14 +5,18 @@ import axiosInstance from "../axiosinstance";
 const DoctorDashboard = () => {
   const [summary, setSummary] = useState({});
 const [sending, setSending] = useState(false);
+const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchSummary = async () => {
+      setLoading(true)
       const res = await axiosInstance.get(
         "appointment/DoctorSummary",
         { withCredentials: true }
       );
       setSummary(res.data.data);
+            setLoading(false)
+
     };
     fetchSummary();
   }, []);
@@ -24,6 +28,8 @@ const [sending, setSending] = useState(false);
       { withCredentials: true }
     );
     window.location.href = res.data.data.desktopUrl;
+        setSending(false)
+
   };
 
   return (
@@ -37,7 +43,11 @@ const [sending, setSending] = useState(false);
           Today’s OPD Summary
         </p>
       </div>
-
+ {loading && (
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+    <span className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin" />
+  </div>
+)}
       {/* Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
         {/* Patients */}
@@ -83,6 +93,7 @@ const [sending, setSending] = useState(false);
       </div>
 <div className="flex justify-center">
   <button
+  disabled={sending}
     onClick={handleSendWhatsApp}
     className="w-full sm:w-auto flex items-center justify-center gap-2
                bg-green-500 text-white px-8 py-3 rounded-xl
@@ -92,7 +103,8 @@ const [sending, setSending] = useState(false);
                transition-all duration-200"
   >
     <span className="text-lg">📲</span>
-    Send via WhatsApp
+    
+    {sending ? "messaging..." : "Send via WhatsApp"}
   </button>
 </div>
 
