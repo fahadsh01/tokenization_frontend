@@ -292,7 +292,7 @@ function QueueCard({ title, remainingTokens, setShowPay, setId }) {
         ) : (
           remainingTokens.map((item, index) => (
            <div
-  key={item.tokenNumber}
+  key={item._id}
   className="flex justify-between items-center px-3 py-2 bg-gray-50 rounded-lg"
 >
   {/* Left: Token + Patient */}
