@@ -28,16 +28,13 @@ const CreateAppointment = () => {
       console.log(token)
         const whatsappUrl = res.data.data.whatsappUrl;
         const desktopUrl = res.data.data.desktopUrl;
-
             window.location.href = desktopUrl;
-
-   
 
     } catch (err) {
       setMessage(
         err.response?.data?.message || "Something went wrong"
       );
-            setMessageType("error")
+      setMessageType("error")
 
     } finally {
       setLoading(false);
@@ -59,12 +56,9 @@ const CreateAppointment = () => {
     <span className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin" />
   </div>
 )}
-      {/* Main Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* LEFT: Form Card */}
         <div className="bg-white rounded-xl shadow-md p-5 md:p-6 w-full lg:max-w-xl">
           <div className="space-y-5">
-            {/* Patient Name */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Patient Name
@@ -73,7 +67,8 @@ const CreateAppointment = () => {
                 type="text"
                 placeholder="Enter patient name"
                 className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              onChange={(e)=>{setPatientName(e.target.value)}}
+              required
+                onChange={(e)=>{setPatientName(e.target.value)}}
               />
             </div>
 
@@ -86,7 +81,8 @@ const CreateAppointment = () => {
                 type="text"
                 placeholder="92500764334"
                 className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                           onChange={(e)=>{setWhatsapp(e.target.value)}}
+                required           
+                onChange={(e)=>{setWhatsapp(e.target.value)}}
 
              />
 <span className="block mt-1 text-xs text-gray-500">
