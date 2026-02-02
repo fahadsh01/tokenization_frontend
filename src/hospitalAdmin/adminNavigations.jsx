@@ -14,7 +14,6 @@ function HospitalSidebar() {
         "/users/getUserProfile",
         { withCredentials: true }
       );
-console.log(res.data.data)
       setProfile(res.data.data);
     } catch (error) {
       console.error(

@@ -17,6 +17,7 @@ function App() {
       <Route path="/hospital/*" element={<Dashboard />} />
     </Route>
     <Route path="*" element={<Navigate to="/login" replace />} />
+    
   </Routes>
 
 </Router>

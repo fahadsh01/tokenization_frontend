@@ -12,9 +12,7 @@ const [sending, setSending] = useState(false);
         "appointment/DoctorSummary",
         { withCredentials: true }
       );
-      console.log("re",res)
       setSummary(res.data.data);
-      console.log("umry",summary)
     };
     fetchSummary();
   }, []);

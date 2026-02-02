@@ -34,7 +34,6 @@ const [activeStatus, setActiveStatus] = useState("ALL");
         withCredentials: true,
       }
     );
-    console.log("ress",res)
     setAppointments(res.data.data || []);
     if (!res.data.data?.length) {
       setMessage(res.data.message);

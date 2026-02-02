@@ -11,7 +11,6 @@ const Settings = () => {
     const fetchSettings = async () => {
       try {
         const res = await axiosInstance.get("/users/settings");
-console.log("res",res)
         const currentSetting = res.data?.data?.settings;
 console.log("currenting",currentSetting)
         setPaymentMode(currentSetting);

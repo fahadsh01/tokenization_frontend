@@ -20,9 +20,7 @@ function MyPayments() {
       const res = await axiosInstance.get("/payment/getmyPayments", {
         withCredentials: true,
       });
-console.log(res)
       setPayments(res.data.data || []);
-console.log(res.data.data)
 
       if (!res.data.data?.length) {
         setMessage(res.data.message || "No payments found");

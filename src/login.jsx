@@ -22,7 +22,6 @@ const handleSubmit = async (e) => {
       { withCredentials: true }
     );
 
-console.log(res)
     const role = res.data.data.user.role;
     setMessage("Login successful");
 
@@ -120,9 +119,6 @@ console.log(res)
     {message}
   </p>
 )}
-
-
-
             {/* Remember / Forgot */}
             <div className="flex items-center justify-between text-sm">
               <label className="flex items-center gap-2 text-gray-600">
@@ -145,12 +141,9 @@ console.log(res)
 >
   Login
 </button>
-
-
           </form>
         </div>
       </main>
-
       {/* ===== Footer ===== */}
       <footer className="relative z-10 py-4 text-center text-xs text-gray-500">
         Built & Maintained by{" "}
