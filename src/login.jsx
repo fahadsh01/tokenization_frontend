@@ -59,10 +59,10 @@ const handleSubmit = async (e) => {
       {/* ===== Header ===== */}
       <header className="relative z-10 px-6 py-4 flex justify-between items-center">
         <h1 className="text-xl font-bold text-slate-800">
-          SysVON
+          ClinicoFlow
         </h1>
         <span className="text-sm text-slate-500">
-          Hospital Management System
+        Smart Patient Flow Management
         </span>
       </header>
 
