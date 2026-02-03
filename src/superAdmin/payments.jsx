@@ -37,13 +37,13 @@ function SuperAdminPayments() {
     setPaymentlist(res.data.data || []);
     if (!res.data.data?.length) {
       setMessage(res.data.message);
-      setMessageType("success");
+      setMessageTypee("success");
     }
   } catch (err) {
     setMessage(
       err.response?.data?.message || "Failed to fetch appointments"
     );
-    setMessageType("error");
+    setMessageTypee("error");
   } finally {
     setLoading(false);
   }
@@ -67,7 +67,7 @@ const handleclick = async (tenantid) => {
         withCredentials: true,
       }
     );
-    setMessagee(res.data.message);
+    setMessagee(res.data.message || "payment approved ");
     setMessageTypee("success");
   } catch (err) {
     setMessagee(
@@ -92,7 +92,7 @@ const handleclick1 = async (tenantid) => {
         withCredentials: true,
       }
     );
-    setMessagee(res.data.message);
+    setMessagee(res.data.message || "payment Rejected");
     setMessageTypee("success");
   } catch (err) {
     setMessagee(
@@ -301,7 +301,7 @@ SUSPENDED  </button>
                 : "text-red-700 bg-red-50 border-red-200"
             }`}
         >
-          {message}
+          {messagee}
         </div>
       )}
       <div className="flex gap-3 pt-4">

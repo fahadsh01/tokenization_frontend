@@ -8,6 +8,7 @@ const CreateAppointment = () => {
     const [loading, setLoading] = useState(false);
       const [message, setMessage] = useState("");
       const [messageType, setMessageType] = useState(""); 
+            const [time, setTime] = useState(""); 
   const [token,setToken]=useState({})
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,7 +19,7 @@ const CreateAppointment = () => {
      const res= await axiosInstance.post(
         "/appointment/createappointment",
         {
-          patientName,whatsapp,amount
+          patientName,whatsapp,amount,time
         },
         { withCredentials: true }
       );
@@ -96,6 +97,22 @@ const CreateAppointment = () => {
 
              />
             </div>
+            <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+                Appiontment Time
+              </label>  
+              <input
+  type="time"
+  onChange={(e) => {
+    const value = e.target.value; // "15:00"
+    const [h, m] = value.split(":");
+    const hour = h % 12 || 12;
+    const ampm = h >= 12 ? "PM" : "AM";
+    setTime(`${hour}:${m} ${ampm}`);
+  }}
+                className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+/>
+</div>
 
             {/* Submit Button */}
             <button

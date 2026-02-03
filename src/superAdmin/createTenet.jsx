@@ -20,6 +20,7 @@ function CreateTenant() {
   const [whatsappSender, setWhatsappSender] = useState("");
   const [twilioSid, setTwilioSid] = useState("");
   const [twilioToken, setTwilioToken] = useState("");
+    const [waplang, setWaplang] = useState("EN");
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -38,6 +39,7 @@ if (!planType) {
           fullname,
           password,
           contact,
+          waplang,
            planType,
            settings,
           subscriptionPrice,
@@ -96,7 +98,7 @@ if (!planType) {
         value={hospitalname}
         onChange={(e) => setHospitalname(e.target.value)}
         placeholder="Hospital Name"
-        className="w-full rounded-lg border px-4 py-2 focus:ring-2 focus:ring-blue-500"
+        className="w-full rounded-lg border px-4 py-2 focus:ring-blue-500"
       />
 
       {/* Full Name */}
@@ -104,7 +106,7 @@ if (!planType) {
         value={fullname}
         onChange={(e) => setFullname(e.target.value)}
         placeholder="Your Name"
-        className="w-full rounded-lg border px-4 py-2 focus:ring-2 focus:ring-blue-500"
+        className="w-full rounded-lg border px-4 py-2  focus:ring-blue-500"
       />
 
       {/* Tenant ID */}
@@ -112,7 +114,7 @@ if (!planType) {
         value={tenantid}
         onChange={(e) => setTenantid(e.target.value)}
         placeholder="Tenant ID"
-        className="w-full rounded-lg border px-4 py-2 focus:ring-2 focus:ring-blue-500"
+        className="w-full rounded-lg border px-4 py-2  focus:ring-blue-500"
       />
 
       {/* Admin Username */}
@@ -121,34 +123,39 @@ if (!planType) {
         value={username}
         onChange={(e) => setUsername(e.target.value)}
         placeholder="Admin Username"
-        className="w-full rounded-lg border px-4 py-2 focus:ring-2 focus:ring-blue-500"
+        className="w-full rounded-lg border px-4 py-2  focus:ring-blue-500"
       />
 
-      {/* Admin Password */}
       <input
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         placeholder="Admin Password"
-        className="w-full rounded-lg border px-4 py-2 focus:ring-2 focus:ring-blue-500"
+        className="w-full rounded-lg border px-4 py-2  focus:ring-blue-500"
       />
 
-      {/* Contact */}
       <div>
         <input
           value={contact}
           onChange={(e) => setContact(e.target.value)}
           placeholder="923456789011"
-          className="w-full rounded-lg border px-4 py-2 focus:ring-2 focus:ring-blue-500"
+          className="w-full rounded-lg border px-4 py-2  focus:ring-blue-500"
         />
         <span className="mt-1 block text-xs text-gray-500">
           WhatsApp number must start with country code without operators
         </span>
       </div>
+       <select
+        value={waplang}
+        onChange={(e) => setWaplang(e.target.value)}
+        className="w-full rounded-lg border px-4 py-2 bg-white"
+      >
+        <option value={"EN"}>English</option>
+        <option value={"UR"}>Urdu</option>
+      </select>
 
-      {/* Settings */}
       <select
-        value={planType}
+        value={settings}
         onChange={(e) => setSettings(e.target.value)}
         className="w-full rounded-lg border px-4 py-2 bg-white"
       >
@@ -176,7 +183,7 @@ if (!planType) {
         value={subscriptionPrice}
         onChange={(e) => setSubscriptionPrice(e.target.value)}
         placeholder="Subscription Price"
-        className="w-full rounded-lg border px-4 py-2 focus:ring-2 focus:ring-blue-500"
+        className="w-full rounded-lg border px-4 py-2  focus:ring-blue-500"
       />
 
       {/* Expiry */}
@@ -184,7 +191,7 @@ if (!planType) {
         type="date"
         value={expiryDate}
         onChange={(e) => setExpiryDate(e.target.value)}
-        className="w-full rounded-lg border px-4 py-2 focus:ring-2 focus:ring-blue-500"
+        className="w-full rounded-lg border px-4 py-2  focus:ring-blue-500"
       />
 
       {/* Status */}

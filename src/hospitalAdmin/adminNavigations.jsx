@@ -88,9 +88,18 @@ function HospitalSidebar() {
     {profile?.hospitalname}
   </h1>
 
-  <h3 className="text-sm font-medium">
-    Status: {profile?.status}
-  </h3>
+  <h3
+  className={`text-sm font-medium ${
+    profile?.status === "Active"
+      ? "text-green-600"
+      : profile?.status === "Expired"
+      ? "text-red-600"
+      : "text-gray-600"
+  }`}
+>
+  Status: {profile?.status}
+</h3>
+
   <p className="text-[11px] text-slate-400">
     Product of Sysvon Digital Solution
   </p>

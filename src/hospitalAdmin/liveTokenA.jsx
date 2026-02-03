@@ -81,7 +81,7 @@ const [amount, setAmount] = useState("");
     }
   };
  const handlePay = async (amount,selectedId ) => {
-setMessage(""),
+  setMessage(""),
 setMessageType("")
     try {
      const res = await axiosInstance.post(
@@ -89,7 +89,6 @@ setMessageType("")
         {amount},
         { withCredentials: true }
       );
-      console.log(res)
       setMessage(res.data.message)
         setMessageType("success");
         refreshToken()
@@ -98,7 +97,8 @@ setMessageType("")
       setMessage(err.response?.data?.message || "Failed to add payment");
       setMessageType("error");
     } finally {
-      setLoading(false);
+      setAmount("")
+      setLoadingr(false);
     }
   };
   useEffect(() => {
@@ -312,7 +312,7 @@ useEffect(() => {
 // Reusable Queue Card
 function QueueCard({ title, remainingTokens,refreshToken ,loadingr, setShowPay, setId }) {
   return (
-    <div className="bg-white rounded-lg shadow p-4 flex flex-col h-full">
+<div className="bg-white rounded-lg shadow p-4 flex flex-col h-[600px]">
 <button
   onClick={refreshToken}
   disabled={loadingr}
@@ -392,6 +392,7 @@ function QueueCard({ title, remainingTokens,refreshToken ,loadingr, setShowPay, 
         )}
       </div>
     </div>
+
   );
 }
 
