@@ -160,6 +160,7 @@ useEffect(() => {
               <th className="text-left px-4 py-3">Token</th>
               <th className="text-left px-4 py-3">Patient</th>
               <th className="text-left px-4 py-3">WhatsApp</th>
+              <th className="text-left px-4 py-3">Date</th>
               <th className="text-left px-4 py-3">Status</th>
               <th className="text-left px-4 py-3">Amount</th>
               <th className="text-left px-4 py-3">Payment</th>
@@ -182,7 +183,9 @@ useEffect(() => {
                 <td className="px-4 py-3">
                   {appt.whatsapp}
                 </td>
-               
+                <td className="px-4 py-3">
+                  {appt.appointmentDatePK}
+                </td>
                 <td className="px-4 py-3">
                   <span
                     className={`px-3 py-1 rounded-full text-xs font-medium ${

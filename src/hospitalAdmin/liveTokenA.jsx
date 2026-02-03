@@ -6,6 +6,7 @@ function LiveTokenPage() {
   const [showPay, setShowPay] = useState(false);
 const [selectedId, setSelectedId] = useState(null);
   const [loading, setLoading] = useState(false);
+    const [loadingr, setLoadingr] = useState(false);
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState("");
   const [currentToken, setCurrentToken] = useState(null);
@@ -30,8 +31,6 @@ const [amount, setAmount] = useState("");
       setNextToken(res.data.data.nextToken);
       setButton(res.data.data.state);
       setQueueState(res.data.data.queueState);
-      setRemainingTokens(res.data.data.waitingTokens || []);
-      setDoneTokens(res.data.data.doneAndSkippedTokens || []);
       setUserSetting(res.data.data.setting || []);
 
     } catch (err) {
@@ -84,7 +83,6 @@ const [amount, setAmount] = useState("");
  const handlePay = async (amount,selectedId ) => {
 setMessage(""),
 setMessageType("")
-    setLoading(true);
     try {
      const res = await axiosInstance.post(
         `/appointment/${selectedId}/addPatientPayment`,
@@ -94,6 +92,7 @@ setMessageType("")
       console.log(res)
       setMessage(res.data.message)
         setMessageType("success");
+        refreshToken()
         setShowPay(false)
     } catch (err) {
       setMessage(err.response?.data?.message || "Failed to add payment");
@@ -106,15 +105,36 @@ setMessageType("")
     fetchLiveToken();
   }, []);
 
+const refreshToken = async () => {
+  setLoadingr(true);
+  setMessage("");
+
+  try {
+    const res = await axiosInstance.get("/appointment/refreshLiveToken", {
+      withCredentials: true,
+    });
+
+    setRemainingTokens(res.data.data.waitingTokens || []);
+    setDoneTokens(res.data.data.doneAndSkippedTokens || []);
+    setUserSetting(res.data.data.setting || "");
+  } catch (err) {
+    setMessage(err.response?.data?.message || "Failed to refresh tokens");
+    setMessageType("error");
+  } finally {
+    setLoadingr(false);
+  }
+};
+useEffect(() => {
+    if (userSetting !== "NONE") {
+    refreshToken();
+  }
+}, [userSetting]);
   return (
     <div className="bg-gray-100 p-4 md:p-6 min-h-screen">
-      {/* Header */}
       <div className="mb-6">
         <h1 className="text-2xl font-semibold text-gray-800">Live Token</h1>
         <p className="text-sm text-gray-500">Real-time queue management</p>
       </div>
-
-      {/* Message */}
       {message && (
         <div
           className={`mb-4 text-sm text-center rounded-lg px-4 py-2 border ${
@@ -127,7 +147,6 @@ setMessageType("")
         </div>
       )}
 
-      {/* Loading */}
       {loading && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
           <span className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin" />
@@ -139,7 +158,7 @@ setMessageType("")
         {/* LEFT — Waiting (only BOTH) */}
         {userSetting === "BOTH" && (
           <div className="lg:col-span-3">
-            <QueueCard title="Done" remainingTokens={doneTokens} setShowPay={setShowPay} setId={setSelectedId}/>
+            <QueueCard title="Done" remainingTokens={doneTokens}   refreshToken={refreshToken} loadingr={loadingr}  setShowPay={setShowPay} setId={setSelectedId}/>
           </div>
         )}
 {showPay && (
@@ -191,13 +210,25 @@ setMessageType("")
             Cancel
           </button>
 
-          <button
-            onClick={() => handlePay(amount, selectedId)}
-            disabled={!amount}
-            className="px-4 py-2 text-sm rounded-lg bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50"
-          >
-            Confirm Payment
-          </button>
+         <button
+  onClick={() => handlePay(amount, selectedId)}
+  disabled={!amount || loadingr}
+  className="px-4 py-2 text-sm rounded-lg 
+             bg-blue-600 text-white 
+             hover:bg-blue-700 
+             disabled:opacity-50 
+             flex items-center justify-center gap-2"
+>
+  {loadingr ? (
+    <>
+      <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+      <span>Processing…</span>
+    </>
+  ) : (
+    "Confirm Payment"
+  )}
+</button>
+
         </div>
       </div>
     </div>
@@ -261,7 +292,7 @@ setMessageType("")
           <div className="lg:col-span-3">
             <QueueCard
               title= "Remaining Queue"
-              remainingTokens={remainingTokens} setShowPay={setShowPay} setId={setSelectedId}
+              remainingTokens={remainingTokens} refreshToken={refreshToken} loadingr={loadingr}  setShowPay={setShowPay} setId={setSelectedId}
             />
           </div>
         )}
@@ -269,7 +300,7 @@ setMessageType("")
           <div className="lg:col-span-3">
             <QueueCard
               title= "Done"
-              remainingTokens={doneTokens} setShowPay={setShowPay} setId={setSelectedId}
+              remainingTokens={doneTokens}   refreshToken={refreshToken} loadingr={loadingr} setShowPay={setShowPay} setId={setSelectedId}
             />
           </div>
         )}
@@ -279,9 +310,24 @@ setMessageType("")
 }
 
 // Reusable Queue Card
-function QueueCard({ title, remainingTokens, setShowPay, setId }) {
+function QueueCard({ title, remainingTokens,refreshToken ,loadingr, setShowPay, setId }) {
   return (
     <div className="bg-white rounded-lg shadow p-4 flex flex-col h-full">
+<button
+  onClick={refreshToken}
+  disabled={loadingr}
+  className="mb-3 w-full px-3 py-1.5 rounded-md text-sm font-medium
+             bg-slate-100 hover:bg-slate-200 transition
+             flex items-center justify-center gap-2
+             disabled:opacity-50 disabled:cursor-not-allowed"
+>
+ {loadingr ? (
+  <span className="w-4 h-4 border-2 border-slate-400 border-t-transparent rounded-full animate-spin" />
+) : (
+  "Refresh"
+)}
+</button>
+
       <p className="text-sm text-gray-500 mb-3 text-center">{title}</p>
 
       <div className="flex-1 overflow-y-auto space-y-2">
