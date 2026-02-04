@@ -25,9 +25,7 @@ const CreateAppointment = () => {
       );
       setMessage(" Appionment created successfully");
       setMessageType("success")
-      setToken(res.data.data.appointment)
-      console.log(token)
-        const whatsappUrl = res.data.data.whatsappUrl;
+      setToken(res.data.data)
         const desktopUrl = res.data.data.desktopUrl;
             window.location.href = desktopUrl;
 

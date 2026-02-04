@@ -8,6 +8,7 @@ const Settings = () => {
   const [whatsappLanguage, setWhatsappLanguage] = useState("EN"); // EN | UR
   const [initialWhatsappLanguage, setInitialWhatsappLanguage] = useState("EN");
   const [loading, setLoading] = useState(false);
+  const [loadinge, setLoadinge] = useState(false);
 
   useEffect(() => {
     const fetchSettings = async () => {
@@ -63,7 +64,7 @@ const Settings = () => {
     if (whatsappLanguage === initialWhatsappLanguage) return;
 
     try {
-      setLoading(true);
+      setLoadinge(true);
 
       await axiosInstance.put(
         "/users/change-whatsapp-language",
@@ -72,11 +73,11 @@ const Settings = () => {
       );
 
       setInitialWhatsappLanguage(whatsappLanguage);
-      alert("WhatsApp language updated successfully.");
+      
     } catch (err) {
       alert("Failed to update WhatsApp language");
     } finally {
-      setLoading(false);
+      setLoadinge(false);
     }
   };
 
@@ -222,11 +223,11 @@ const Settings = () => {
         <div className="mt-6">
           <button
             onClick={handleSaveWhatsappLanguage}
-            disabled={loading || whatsappLanguage === initialWhatsappLanguage}
+            disabled={loadinge || whatsappLanguage === initialWhatsappLanguage}
             className="bg-emerald-600 text-white px-6 py-2 rounded-lg font-medium
                        hover:bg-emerald-700 transition disabled:opacity-50"
           >
-            {loading ? "Saving..." : "Save Language"}
+            {loadinge ? "Saving..." : "Save Language"}
           </button>
         </div>
       </div>

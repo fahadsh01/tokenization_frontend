@@ -7,6 +7,8 @@ function LiveTokenPage() {
 const [selectedId, setSelectedId] = useState(null);
   const [loading, setLoading] = useState(false);
     const [loadingr, setLoadingr] = useState(false);
+        const [loadingw, setLoadingw] = useState(false);
+
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState("");
   const [currentToken, setCurrentToken] = useState(null);
@@ -42,7 +44,7 @@ const [amount, setAmount] = useState("");
   };
 
   const advanceToken = async () => {
-    setLoading(true);
+    setLoadingw(true);
     try {
       const res = await axiosInstance.post(
         "/appointment/advanceToken",
@@ -57,7 +59,7 @@ const [amount, setAmount] = useState("");
       setMessage("Failed to advance token");
       setMessageType("error");
     } finally {
-      setLoading(false);
+      setLoadingw(false);
     }
   };
 
@@ -219,14 +221,15 @@ useEffect(() => {
              disabled:opacity-50 
              flex items-center justify-center gap-2"
 >
-  {loadingr ? (
-    <>
-      <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-      <span>Processing…</span>
-    </>
-  ) : (
-    "Confirm Payment"
-  )}
+ {loadingr ? (
+  <div className="flex items-center gap-2">
+    <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+    <span>Processing…</span>
+  </div>
+) : (
+  <span>Confirm Payment</span>
+)}
+
 </button>
 
         </div>
@@ -260,21 +263,30 @@ useEffect(() => {
               </div>
             </div>
 
-            <div className="flex justify-center gap-3 mb-4">
-              <button
-                onClick={advanceToken}
-                className="px-4 py-2 rounded-lg bg-blue-600 text-white text-sm hover:bg-blue-700"
-              >
-                {button}
-              </button>
+           <div className="flex justify-center gap-3 mb-4">
+  <button
+    disabled={loadingw}
+    onClick={advanceToken}
+    className="px-4 py-2 rounded-lg bg-blue-600 text-white text-sm hover:bg-blue-700 flex items-center gap-2 disabled:opacity-60"
+  >
+    {loadingw ? (
+      <>
+        <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+        <span>Advancing...</span>
+      </>
+    ) : (
+      <span>{button || "Advance Token"}</span>
+    )}
+  </button>
 
-              <button
-                onClick={skipLiveToken}
-                className="px-4 py-2 rounded-lg bg-yellow-500 text-white text-sm hover:bg-yellow-600"
-              >
-                Skip Token
-              </button>
-            </div>
+  <button
+    onClick={skipLiveToken}
+    className="px-4 py-2 rounded-lg bg-yellow-500 text-white text-sm hover:bg-yellow-600"
+  >
+    Skip Token
+  </button>
+</div>
+
 
             <p className="text-sm text-gray-500">
               Queue Status:{" "}
