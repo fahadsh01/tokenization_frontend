@@ -83,6 +83,7 @@ const [amount, setAmount] = useState("");
     }
   };
  const handlePay = async (amount,selectedId ) => {
+ setLoadingr(true);
   setMessage(""),
 setMessageType("")
     try {

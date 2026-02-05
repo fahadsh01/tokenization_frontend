@@ -28,7 +28,6 @@ const CreateAppointment = () => {
       setToken(res.data.data)
         const desktopUrl = res.data.data.desktopUrl;
             window.location.href = desktopUrl;
-
     } catch (err) {
       setMessage(
         err.response?.data?.message || "Something went wrong"
@@ -95,22 +94,37 @@ const CreateAppointment = () => {
 
              />
             </div>
-            <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-                Appiontment Time
-              </label>  
-              <input
-  type="time"
-  onChange={(e) => {
-    const value = e.target.value; // "15:00"
-    const [h, m] = value.split(":");
-    const hour = h % 12 || 12;
-    const ampm = h >= 12 ? "PM" : "AM";
-    setTime(`${hour}:${m} ${ampm}`);
-  }}
-                className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-/>
+     <div className="space-y-1.5">
+  <label className="block text-sm font-semibold text-slate-700">
+    Appointment Time
+  </label>
+
+  <input
+    type="time"
+    onChange={(e) => {
+      const value = e.target.value; // "15:00"
+      const [h, m] = value.split(":");
+      const hour = h % 12 || 12;
+      const ampm = h >= 12 ? "PM" : "AM";
+      setTime(`${hour}:${m} ${ampm}`);
+    }}
+    className="
+      w-full
+      rounded-xl
+      border border-blue-200
+      bg-white
+      px-4 py-2.5
+      text-sm text-slate-700
+      shadow-sm
+      transition
+      focus:outline-none
+      focus:border-blue-500
+      focus:ring-2
+      focus:ring-blue-500/20
+    "
+  />
 </div>
+
 
             {/* Submit Button */}
             <button

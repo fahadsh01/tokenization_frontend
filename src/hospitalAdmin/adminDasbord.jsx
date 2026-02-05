@@ -10,6 +10,7 @@ import MyPayments from "./MyPayments"
 import DoctorDashboard from "./DoctorDashboard";
 import ProductOverview from "./Settings";
 import Settings from "./sett";
+import PublicNoticePage from "./PublicNoticePage";
 import Footer from "./footer";
 
 function Dashboard() {
@@ -25,9 +26,11 @@ function Dashboard() {
               <Route path="live-token" element={<LiveTokenPage />} />
               <Route path="madePayment" element={<MadePayment/>} />
               <Route path="myPayments" element={<MyPayments/>} />
-                             <Route path="summary" element={<DoctorDashboard/>} />
-                             <Route path="overview" element={<ProductOverview/>} />
-                             <Route path="settings" element={<Settings/>} />
+              <Route path="summary" element={<DoctorDashboard/>} />
+              <Route path="overview" element={<ProductOverview/>} />
+              <Route path="settings" element={<Settings/>} />
+              <Route path="notic-page" element={<PublicNoticePage/>} />
+
 
 
             </Routes>
@@ -39,5 +42,4 @@ function Dashboard() {
       </div>
   );
 }
-
 export default Dashboard;

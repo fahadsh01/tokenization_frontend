@@ -208,6 +208,19 @@ Summary          </NavLink>
             }
           >
   Guide        </NavLink>
+   <NavLink 
+
+            to="/hospital/notic-page"
+            onClick={() => setOpen(false)}
+            className={({ isActive }) =>
+              `block px-4 py-2 rounded-lg text-sm font-medium ${
+                isActive
+                  ? "bg-blue-600 text-white"
+                  : "text-slate-300 hover:bg-slate-800"
+              }`
+            }
+          >
+ Notic-Page      </NavLink>
   <NavLink 
 
             to="/hospital/settings"

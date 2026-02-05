@@ -21,7 +21,6 @@ const handleSubmit = async (e) => {
       { username, password },
       { withCredentials: true }
     );
-   console.log("re",res)
     const role = res.data.data.role;
 
     setMessage("Login successful");
@@ -59,10 +58,12 @@ const handleSubmit = async (e) => {
 
       {/* ===== Header ===== */}
       <header className="relative z-10 px-6 py-4 flex justify-between items-center">
-        <h1 className="text-xl font-bold text-slate-800">
-          ClinicoFlow
-        </h1>
-        <span className="text-sm text-slate-500">
+    <h1 className="text-xl font-semibold tracking-wide text-slate-800">
+  Clinico<span className="font-bold text-blue-600">Flow</span>
+</h1>
+
+
+        <span className="text-sm text-slate-600">
         Smart Patient Flow Management
         </span>
       </header>
