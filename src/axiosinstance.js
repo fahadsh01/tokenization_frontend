@@ -41,7 +41,7 @@ axiosInstance.interceptors.response.use(
 
       try {
         await axios.post(
-          `${API_BASE}/users/refreshAccessToken`,
+          `${API_BASE}/admin/refreshAccessToken`,
           {},
           { withCredentials: true }
         );
